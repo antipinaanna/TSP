@@ -10,11 +10,12 @@
 Solver::Solver(float crossover, float mutation, unsigned population, unsigned n, std::vector<std::vector<float>> &distance) 
     :dna(crossover, mutation, n, population),
      conditions(distance)
-    {}
+    {std::cout << "hey" << std::endl;}
 
 void Solver::mix(std::vector<std::vector<unsigned>> &vec) {
+    std::cout << "mix" << std::endl;
     for (int i = 0; i < dna.population; i++) {
-        for (int j = 0; j < dna.n; i++) {
+        for (int j = 0; j < dna.n; j++) {
             vec[i][j] = j;
         }
     }
@@ -26,8 +27,8 @@ void Solver::mix(std::vector<std::vector<unsigned>> &vec) {
 }
 
 
-
 int Solver::GetRandomNumber(int min, int max) {
+  std::cout << "rand" << std::endl;
   srand(time(NULL));
   int num = min + rand() % (max - min + 1);
   return num;
@@ -43,6 +44,7 @@ float Solver::sum_vec (std::vector<unsigned> &vec) {
 }
 
 std::vector<unsigned> Solver::crossover(std::vector<unsigned> &parent1, std::vector<unsigned> &parent2) {
+    std::cout << "cros" << std::endl;
     std::vector<unsigned> son (dna.n, 0);
     unsigned n = son.size();
     std::vector<bool> in_or_not (n, 0);
@@ -69,6 +71,7 @@ std::vector<unsigned> Solver::crossover(std::vector<unsigned> &parent1, std::vec
 }
 
 void Solver::pairing(std::vector<std::vector<unsigned>> &pairs) {
+    std::cout << "pairing" << std::endl;
     int j;
     for (int i = 0; i < dna.population; i++) {
         pairs[i][0] = GetRandomNumber(int((1 - dna.crossover) * dna.population), dna.population - 1); /////////////////
@@ -81,7 +84,8 @@ void Solver::pairing(std::vector<std::vector<unsigned>> &pairs) {
 }
 
 void Solver::selection_recombination(unsigned &iter) {
-    if (iter > 1000) return;
+    if (iter > 10) return;
+     std::cout << "selecreco" <<" " << iter << std::endl;
     iter++;
     unsigned k;
     std::sort(dna.dad_son.begin(), dna.dad_son.end(), [this](std::vector<unsigned> &a, std::vector<unsigned> &b) { return sum_vec(a) < sum_vec(b);});

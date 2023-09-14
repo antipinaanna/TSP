@@ -29,11 +29,14 @@ int main()
                     unsigned n, population;
                     population = unsigned(crossover * n);
 					file >> n;
+					std::cout << n << std::endl;
 					std::vector<std::vector<float>> distance(n, std::vector<float>(2, 0)); 
 					for (int i = 0; i < n; i++)
 					{
 						file >> distance[i][0] >> distance[i][1];
+					//	std::cout << distance[i][0] << " " << distance[i][1] << std::endl;
 					}
+
 					std::cout << "hello3" << std::endl;
 					Solver solver(crossover, mutation, population, n, distance); 
 					std::cout << "hello4" << std::endl;
